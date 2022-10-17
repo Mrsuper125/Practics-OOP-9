@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Урок03.10", "Урок03
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Фоновая 1.1", "Фоновая 1.1\Фоновая 1.1.csproj", "{592A01F6-A0CB-4BCF-A2D1-7CE7A72AAF68}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Фоновая 1.2", "Фоновая 1.2\Фоновая 1.2.csproj", "{ECFB0517-393A-45B4-8083-BEEDEBE94FC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{592A01F6-A0CB-4BCF-A2D1-7CE7A72AAF68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{592A01F6-A0CB-4BCF-A2D1-7CE7A72AAF68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{592A01F6-A0CB-4BCF-A2D1-7CE7A72AAF68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECFB0517-393A-45B4-8083-BEEDEBE94FC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECFB0517-393A-45B4-8083-BEEDEBE94FC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECFB0517-393A-45B4-8083-BEEDEBE94FC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECFB0517-393A-45B4-8083-BEEDEBE94FC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
