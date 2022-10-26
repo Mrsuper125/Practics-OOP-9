@@ -87,6 +87,7 @@ namespace Практика_9
         {
             int N = int.Parse(Console.ReadLine());
             Console.WriteLine(third(N));
+            Console.ReadKey();
         }
     }
 }
