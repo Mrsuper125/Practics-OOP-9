@@ -19,7 +19,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Фоновая 1.1", "Фо�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Фоновая 1.2", "Фоновая 1.2\Фоновая 1.2.csproj", "{ECFB0517-393A-45B4-8083-BEEDEBE94FC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Бинарный поиск", "Бинарный поиск\Бинарный поиск.csproj", "{8AA50545-D36E-4A9A-8CA7-A99786DD3951}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "БинПоиск", "БинПоиск\БинПоиск.csproj", "{8AA50545-D36E-4A9A-8CA7-A99786DD3951}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Практика 7", "Практика 7\Практика 7.csproj", "{4DA84E6D-4D74-4E9B-9489-F28034CC793D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{8AA50545-D36E-4A9A-8CA7-A99786DD3951}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AA50545-D36E-4A9A-8CA7-A99786DD3951}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AA50545-D36E-4A9A-8CA7-A99786DD3951}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DA84E6D-4D74-4E9B-9489-F28034CC793D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DA84E6D-4D74-4E9B-9489-F28034CC793D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DA84E6D-4D74-4E9B-9489-F28034CC793D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DA84E6D-4D74-4E9B-9489-F28034CC793D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
