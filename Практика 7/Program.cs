@@ -5,6 +5,17 @@ namespace Практика_9
     class Program
     {
 
+        static int BCD(int x, int y)        // biggest common divider = НОД
+        {
+            while (x != y)
+            {
+                if (x > y) x -= y;
+                else y -= x;
+            }
+
+            return x;
+        }
+        
         static void remainder()
         {
             int A = int.Parse(Console.ReadLine());
@@ -83,10 +94,70 @@ namespace Практика_9
             return (left == right);
         }
 
+        static void fourth(int p, int q)
+        {
+            for (int i = 2; i < Math.Sqrt(q); i++)
+            {
+                if (BCD(i, p) != 1)
+                {
+                    Console.WriteLine(i);
+                }
+                if (BCD(q/i, p) != 1)
+                {
+                    Console.WriteLine(q/i);
+                }
+            }
+            if (BCD((int)Math.Sqrt(q), p) != 1)
+            {
+                Console.WriteLine((int)Math.Sqrt(q));
+            }
+        }
+
+        static int fifth()
+        {
+            int res = 0;
+            for (int x = 16; x<=25; x++)
+            {
+                for(int i = 1; i < Math.Sqrt(x); i++)
+                {
+                    if (x%i == 0)
+                    {
+                        res += i;
+                        res += x / i;
+                    }
+                    if (Math.Pow((int)(Math.Sqrt(x)), 2) == x)
+                    {
+                        res += (int)(Math.Sqrt(x)); 
+                    }
+                }
+            }
+            return res;
+        }
+
+        static int sixth(int x)
+        {
+            int res = 0;
+            int copy = x;
+            int len = 0;
+            while (copy > 0)
+            {
+                len++;
+                copy /= 10;
+            }
+            int multiplier = (int)Math.Pow(-1, len - 1);
+            while(x > 0)
+            {
+                res += multiplier * (x%10);
+                x /= 10;
+                multiplier *= -1;
+            }
+            return res;
+        }
+
         static void Main()
         {
             int N = int.Parse(Console.ReadLine());
-            Console.WriteLine(third(N));
+            Console.WriteLine(sixth(N));
             Console.ReadKey();
         }
     }
