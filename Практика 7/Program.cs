@@ -15,7 +15,7 @@ namespace Практика_9
 
             return x;
         }
-        
+
         static void remainder()
         {
             int A = int.Parse(Console.ReadLine());
@@ -102,9 +102,9 @@ namespace Практика_9
                 {
                     Console.WriteLine(i);
                 }
-                if (BCD(q/i, p) != 1)
+                if (BCD(q / i, p) != 1)
                 {
-                    Console.WriteLine(q/i);
+                    Console.WriteLine(q / i);
                 }
             }
             if (BCD((int)Math.Sqrt(q), p) != 1)
@@ -116,18 +116,18 @@ namespace Практика_9
         static int fifth()
         {
             int res = 0;
-            for (int x = 16; x<=25; x++)
+            for (int x = 16; x <= 25; x++)
             {
-                for(int i = 1; i < Math.Sqrt(x); i++)
+                for (int i = 1; i < Math.Sqrt(x); i++)
                 {
-                    if (x%i == 0)
+                    if (x % i == 0)
                     {
                         res += i;
                         res += x / i;
                     }
                     if (Math.Pow((int)(Math.Sqrt(x)), 2) == x)
                     {
-                        res += (int)(Math.Sqrt(x)); 
+                        res += (int)(Math.Sqrt(x));
                     }
                 }
             }
@@ -145,20 +145,39 @@ namespace Практика_9
                 copy /= 10;
             }
             int multiplier = (int)Math.Pow(-1, len - 1);
-            while(x > 0)
+            while (x > 0)
             {
-                res += multiplier * (x%10);
+                res += multiplier * (x % 10);
                 x /= 10;
                 multiplier *= -1;
             }
             return res;
         }
 
+        static void additional1() {
+            int n = int.Parse(Console.ReadLine());
+            int m = int.Parse(Console.ReadLine());
+            string res = "";
+            if (m > n) m = m % n;
+            for (int i = 0; i < 50; i++)
+            {
+                if (m == 0)
+                {
+                    Console.WriteLine(0);
+                    return;
+                }
+                m *= 10;
+                res += $"{m / n}";
+                m %= n;
+            }
+            Console.WriteLine(res);
+        }   
+
         static void Main()
         {
-            int N = int.Parse(Console.ReadLine());
-            Console.WriteLine(sixth(N));
+            additional1();
             Console.ReadKey();
         }
     }
 }
+
