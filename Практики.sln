@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Фоновая 2", "Фон�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Практика 9", "Практика 9\Практика 9.csproj", "{9A60DDB8-AA37-481C-B0CE-CAEFBE14ACE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Творческая архиватор", "Творческая архиватор\Творческая архиватор.csproj", "{929AAB4F-1106-4AC5-A009-6B193CA72A0F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Творческая архиватор", "Творческая архиватор\Творческая архиватор.csproj", "{3F676428-2109-4DAC-BC08-094BE6047FA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,10 +89,10 @@ Global
 		{9A60DDB8-AA37-481C-B0CE-CAEFBE14ACE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A60DDB8-AA37-481C-B0CE-CAEFBE14ACE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A60DDB8-AA37-481C-B0CE-CAEFBE14ACE7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{929AAB4F-1106-4AC5-A009-6B193CA72A0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{929AAB4F-1106-4AC5-A009-6B193CA72A0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{929AAB4F-1106-4AC5-A009-6B193CA72A0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{929AAB4F-1106-4AC5-A009-6B193CA72A0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F676428-2109-4DAC-BC08-094BE6047FA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F676428-2109-4DAC-BC08-094BE6047FA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F676428-2109-4DAC-BC08-094BE6047FA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F676428-2109-4DAC-BC08-094BE6047FA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
