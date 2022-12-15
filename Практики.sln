@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Практика 9", "Пр�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Творческая архиватор", "Творческая архиватор\Творческая архиватор.csproj", "{3F676428-2109-4DAC-BC08-094BE6047FA7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Практика 10", "Практика 10\Практика 10.csproj", "{6CCC04E3-D583-4621-8164-1FC055B0D299}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,7 +95,11 @@ Global
 		{3F676428-2109-4DAC-BC08-094BE6047FA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F676428-2109-4DAC-BC08-094BE6047FA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F676428-2109-4DAC-BC08-094BE6047FA7}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
+		{6CCC04E3-D583-4621-8164-1FC055B0D299}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CCC04E3-D583-4621-8164-1FC055B0D299}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CCC04E3-D583-4621-8164-1FC055B0D299}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CCC04E3-D583-4621-8164-1FC055B0D299}.Release|Any CPU.Build.0 = Release|Any CPU
+		EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
