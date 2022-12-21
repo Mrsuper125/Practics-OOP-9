@@ -65,6 +65,7 @@ namespace Фоновая_3._1
         public static void Main(string[] args)
         {
             Console.WriteLine(EvenDigitsCountOfF());
+            Console.WriteLine(F(9));
             Console.WriteLine(From1To41Without32());
         }
     }
