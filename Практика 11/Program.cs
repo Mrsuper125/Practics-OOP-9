@@ -7,11 +7,9 @@ namespace Практика_11
         public static int DigitsSum(string s)
         {
             int res = 0;
-            foreach (var ch in s)
-            {
-                if (ch >= '0' && ch <= '9')
-                {
-                    res += Convert.ToInt32(ch.ToString());      //char to int convertation gives you symbol index instead of its meaning
+            foreach (var ch in s){
+                if (Char.IsDigit(ch)){
+                    res += Convert.ToInt32(ch.ToString());
                 }
             }
             return res;
@@ -21,14 +19,9 @@ namespace Практика_11
         {
             string res = "";
             int columnIndex = s.LastIndexOf(':');
-            for (int i = columnIndex+1; i < s.Length; i++)
-            {
-                res += s[i];
-            }
-
-            s = res;
+            s = s.Substring(columnIndex+1);
         } 
-        
+    
         public static void Main(string[] args)
         {
             string s = Console.ReadLine();
