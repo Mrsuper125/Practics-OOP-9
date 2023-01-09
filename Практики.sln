@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Практика 11", "Пр
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Фоновая 3.2", "Фоновая 3.2\Фоновая 3.2.csproj", "{1725523D-5409-423F-8010-9B7D77115FEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ввод текста из файлов", "Ввод текста из файлов\Ввод текста из файлов.csproj", "{4B2E1AFD-C0A7-496D-89C0-9E0F78796A78}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,10 @@ Global
 		{1725523D-5409-423F-8010-9B7D77115FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1725523D-5409-423F-8010-9B7D77115FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1725523D-5409-423F-8010-9B7D77115FEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B2E1AFD-C0A7-496D-89C0-9E0F78796A78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B2E1AFD-C0A7-496D-89C0-9E0F78796A78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B2E1AFD-C0A7-496D-89C0-9E0F78796A78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B2E1AFD-C0A7-496D-89C0-9E0F78796A78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
