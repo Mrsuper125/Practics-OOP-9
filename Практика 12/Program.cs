@@ -31,7 +31,7 @@ namespace Практика_12
             return false;
         }
 
-        static int MinAndMaxOnInterval(out int min)
+        static int MinAndAmountOnInterval(out int min)
         {
             min = 11201;
             int count = 0;
@@ -47,12 +47,45 @@ namespace Практика_12
             return count;
         }
         
+        static int MaxAndAmountOnInterval(out int max)
+        {
+            max = 3440;
+            int count = 0;
+            for (int i = 3439; i <= 7410; i+=1)
+            {
+                if ((i % 9 == 0 || i % 10 == 0 || i % 11 == 0) && (i%2 != i%6))
+                { 
+                    if (i > max) max = i;
+                    count++;
+                }
+            }
+
+            return count;
+        }
+        
+        static int AverageAndAmountOnInterval(out int average)
+        {
+            int max = 2475;
+            int min = 7858;
+            int count = 0;
+            for (int i = 2476; i <= 7857; i+=2)
+            {
+                if (i%8 != 0 && i % 1000 / 100  <= 7)
+                { 
+                    if (i > max) max = i;
+                    if (i < min) min = i;
+                    count++;
+                }
+            }
+
+            average = (max + min) / 2;
+
+            return count;
+        }
+        
         public static void Main(string[] args)
         {
-            foreach (var temp in Create(10, 14))
-            {
-                Console.Write(temp+" ");
-            }
+            
         }
     }
 }
