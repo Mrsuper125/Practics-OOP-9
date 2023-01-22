@@ -7,24 +7,18 @@ namespace Алгоритмы_массивов
 
         public static double AverageSquaredDifference(int[] mas, int N)
         {
-            double average = 0;
-            foreach (var item in mas)
+            double sum = 0;
+            double sumOfSquares = 0;
+            foreach (int num in mas)
             {
-                average += item;
+                sum += num;
+                sumOfSquares += Math.Pow(num, 2);
             }
 
-            average /= N;
-
-            double dispersion = 0;
-
-            foreach (var item in mas)
-            {
-                dispersion += Math.Pow(item - average, 2);
-            }
-
-            dispersion /= N;
-
-            return Math.Sqrt(dispersion);
+            double average = sum / N;
+            double averageBetweenSquares = sumOfSquares / N;
+            double std = Math.Sqrt(averageBetweenSquares - Math.Pow(average, 2));
+            return std;
         }
         
         public static void Main(string[] args)
