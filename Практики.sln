@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ввод текста из 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Практика 12", "Практика 12\Практика 12.csproj", "{6D82CC32-B108-49DD-938C-75480759ABC2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Алгоритмы массивов", "Алгоритмы массивов\Алгоритмы массивов.csproj", "{7A3A7B10-26F0-4908-B967-CEE026CFA96E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,10 @@ Global
 		{6D82CC32-B108-49DD-938C-75480759ABC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D82CC32-B108-49DD-938C-75480759ABC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D82CC32-B108-49DD-938C-75480759ABC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A3A7B10-26F0-4908-B967-CEE026CFA96E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A3A7B10-26F0-4908-B967-CEE026CFA96E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A3A7B10-26F0-4908-B967-CEE026CFA96E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A3A7B10-26F0-4908-B967-CEE026CFA96E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
