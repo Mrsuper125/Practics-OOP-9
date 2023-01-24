@@ -97,11 +97,71 @@ namespace Алгоритмы_сортировки
 
             return arr;
         }
+
+        public static int[] MergeSort(int[] arr)
+        {
+            int[] res = new int[arr.Length];
+            if (arr.Length == 1)
+            {
+                return arr;
+            }
+            else
+            {
+                int middleIndex = (arr.Length-1) / 2;
+                int[] left = new int[middleIndex + 1];
+                int[] right = new int[arr.Length - middleIndex - 1];
+                
+                for (int i = 0; i <= middleIndex; i++)
+                {
+                    left[i] = arr[i];
+                }
+                for (int i = middleIndex+1; i < arr.Length; i++)
+                {
+                    right[i - middleIndex - 1] = arr[i];
+                }
+
+                left = MergeSort(left);
+                right = MergeSort(right);
+                
+                int j = 0;
+                int k = 0;
+                for (int i = 0; i < res.Length; i++)
+                {
+                    if (j == -1)
+                    {
+                        res[i] = right[k];
+                        k++;
+                    }
+                    else if (k == - 1)
+                    {
+                        res[i] = left[j];
+                        j++;
+                    }
+                    else
+                    {
+                        if (left[j] <= right[k])
+                        {
+                            res[i] = left[j];
+                            j++;
+                            if (j == left.Length) j = -1;
+                        }
+                        else
+                        {
+                            res[i] = right[k];
+                            k++;
+                            if (k == right.Length) k = -1;
+                        }
+                    }
+                }
+            }
+
+            return res;
+        }
         
         public static void Main(string[] args)
         {
             int[] initial = new int[] { 4, 6, 3, 6, 7, 7, 5, 6 };
-            int[] sorted = CountSort(initial);
+            int[] sorted = MergeSort(initial);
             foreach (int temp in sorted)
             {
                 Console.Write(temp + " ");
