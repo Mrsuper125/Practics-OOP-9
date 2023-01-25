@@ -27,7 +27,7 @@ namespace Практика_12
                     res = n % 10;
                 }
 
-                res /= 10;
+                n /= 10;
             }
 
             return res;
