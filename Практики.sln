@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Алгоритмы масс
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Алгоритмы сортировки", "Алгоритмы сортировки\Алгоритмы сортировки.csproj", "{4B342FB1-655D-418E-BA00-7D7BF0384CB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Фоновая 4.1", "Фоновая 4.1\Фоновая 4.1.csproj", "{BA3B0733-B9C8-4D1D-9C71-F2472E9F58E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +143,10 @@ Global
 		{4B342FB1-655D-418E-BA00-7D7BF0384CB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B342FB1-655D-418E-BA00-7D7BF0384CB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B342FB1-655D-418E-BA00-7D7BF0384CB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA3B0733-B9C8-4D1D-9C71-F2472E9F58E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA3B0733-B9C8-4D1D-9C71-F2472E9F58E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA3B0733-B9C8-4D1D-9C71-F2472E9F58E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA3B0733-B9C8-4D1D-9C71-F2472E9F58E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
