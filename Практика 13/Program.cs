@@ -83,7 +83,7 @@ namespace Практика_13
                 }
                 else
                 {
-                    for (int j = l - 1; j > 0; j--)
+                    for (int j = l - 1; j >= 0; j--)
                     {
                         arr[i, j] = elem;
                         elem++;
@@ -96,10 +96,10 @@ namespace Практика_13
             Print(arr);
         }
 
-        public static void Hatched()
+        public static int Hatched()
         {
             int[,] arr = new int[11, 11];
-            Console.BackgroundColor = ConsoleColor.White;
+            int max = Int32.MinValue;
             for (int i = 0; i < arr.GetLength(0); i++)
             {
                 for (int j = 0; j < arr.GetLength(1); j++)
@@ -107,12 +107,30 @@ namespace Практика_13
                     int n = arr.GetLength(0);
                     if (OnMain(i, j) || OnAnti(i, j, n) || (AboveMain(i, j) && AboveAnti(i, j, n)) || (UnderMain(i, j) && UnderAnti(i, j, n)))
                     {
-                        Console.BackgroundColor = ConsoleColor.Black;
-                        arr[i, j] = 1;
-                        Console.Write(arr[i, j] + " ");
-                        Console.BackgroundColor = ConsoleColor.White;
+                        if (arr[i, j] > max) max = arr[i, j];
                     }
-                    else Console.Write(0 + " ");
+                }
+            }
+
+            return max;
+        }
+
+        public static void SnowFlake()
+        {
+            Console.Write("Введите размер снежинки: ");
+            int size = Convert.ToInt32(Console.ReadLine());
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    if (OnMain(i, j) || OnAnti(i, j, size) || size == 2 * i + 1 || size == 2 * j + 1)
+                    {
+                        Console.Write("* ");
+                    }
+                    else
+                    {
+                        Console.Write("  ");
+                    }
                 }
                 Console.Write("\n");
             }
@@ -120,7 +138,7 @@ namespace Практика_13
         
         public static void Main(string[] args)
         {
-            Hatched();
+            Snake();
         }
     }
 }
