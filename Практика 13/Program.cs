@@ -33,7 +33,7 @@ namespace Практика_13
 
         public static bool OnAnti(int i, int j, int n)
         {
-            return i + j == n - j - 1;
+            return i + j == n - 1;
         }
 
         public static bool AboveAnti(int i, int j, int n)
@@ -98,7 +98,7 @@ namespace Практика_13
 
         public static void Hatched()
         {
-            int[,] arr = new int[10, 10];
+            int[,] arr = new int[11, 11];
             Console.BackgroundColor = ConsoleColor.White;
             for (int i = 0; i < arr.GetLength(0); i++)
             {
