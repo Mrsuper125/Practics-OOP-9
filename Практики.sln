@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Фоновая 4.1", "Фо�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Практика 13", "Практика 13\Практика 13.csproj", "{BC17C0EA-0188-45D5-AE94-7CD676831369}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Практика 14", "Практика 14\Практика 14.csproj", "{5EF99C45-1DEB-469F-BDDC-2F6ED522E19D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +155,10 @@ Global
 		{BC17C0EA-0188-45D5-AE94-7CD676831369}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC17C0EA-0188-45D5-AE94-7CD676831369}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC17C0EA-0188-45D5-AE94-7CD676831369}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EF99C45-1DEB-469F-BDDC-2F6ED522E19D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EF99C45-1DEB-469F-BDDC-2F6ED522E19D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EF99C45-1DEB-469F-BDDC-2F6ED522E19D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EF99C45-1DEB-469F-BDDC-2F6ED522E19D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
