@@ -1,13 +1,28 @@
 ﻿using System;
+using System.Runtime.ExceptionServices;
+using System.Linq;
 
 namespace Проект_5_модуля
 {
     internal class Program
     {
 
+        public static int[,,] history;
+        public static int max;
+
+        public static bool OnBoard(int i, int j)
+        {
+            return i < 8 && i >= 0 && j < 8 && j >= 0;
+        }
+
+        public static bool White(int i, int j, int[,] board)
+        {
+            return OnBoard(i, j) && board[i, j] == 1;
+        }
+        
         public static bool LowerLeft(int blackI, int blackJ, int whiteI, int whiteJ)
         {
-            return (blackI < 6 && blackJ > 1 && whiteI - 1 == blackI && whiteJ == blackJ - 1);
+            return (blackI < 6 && blackJ > 1 && whiteI - 1 == blackI && whiteJ == blackJ);
         }
         
         public static bool LowerRight(int blackI, int blackJ, int whiteI, int whiteJ)
@@ -23,6 +38,58 @@ namespace Проект_5_модуля
         public static bool UpperRight(int blackI, int blackJ, int whiteI, int whiteJ)
         {
             return (blackI > 1 && blackJ < 6 && whiteI == blackI - 1 && whiteJ - 1 == blackJ);
+        }
+
+        public static int[,,] fillHistory(int[,,] historyParam)
+        {
+            int[,,] resultHistory = new int[historyParam.GetLength(0) + 1, 8, 8];
+            if (history.GetLength(0) > 0)
+            {
+                for (int i = 0; i < historyParam.GetLength(0); i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        for (int k = 0; k < 8; k++)
+                        {
+                            resultHistory[i, j, k] = history[i, j, k];
+                        }
+                    }
+                }
+            }
+
+            return resultHistory;
+        }
+
+        public static void Take(int[,,] historyParam, int[,] board, int blackI, int blackJ, int count)
+        {
+            int[,,] localHistory = fillHistory(historyParam);
+            
+            if (White(blackI - 1, blackJ -1, board) && UpperLeft(blackI, blackJ, blackI - 1, blackJ - 1))
+            {
+                int[,] boardCopy = board;
+
+                boardCopy[blackI, blackJ] = 0;
+                boardCopy[blackI - 1, blackJ - 1] = 0;
+                boardCopy[blackI - 2, blackJ - 2] = -1;
+
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        localHistory[localHistory.GetLength(0) - 1, i, j] = boardCopy[i, j];
+                    }
+                }
+                
+                Take(localHistory, boardCopy, blackI - 2, blackJ - 2, count + 1);
+            }
+            else
+            {
+                if (count > max)
+                {
+                    max = count;
+                    history = historyParam;
+                }
+            }
         }
         
         public static void DisplayBoard(int[,] board)
@@ -62,17 +129,32 @@ namespace Проект_5_модуля
         public static void Main(string[] args)
         {
             int[,] board = new int[8, 8];   //0 - пустая, 1 - белая, -1 - чёрная
+
+            history = new int[0,8,8];
+            
             board[4, 4] = -1;
             board[5, 5] = 1;
             board[3, 5] = 1;
             board[5, 3] = 1;
             board[3, 3] = 1;
+            board[1, 1] = 1;
             DisplayBoard(board);
             
-            Console.WriteLine(LowerRight(4, 4, 5, 5));
-            Console.WriteLine(LowerLeft(4, 4, 5, 3));
-            Console.WriteLine(UpperLeft(4, 4, 3, 3));
-            Console.WriteLine(UpperRight(4, 4, 3, 5));
+            Take(new int[0,8,8], board, 4, 4, 0);
+
+            Console.WriteLine(max);
+            for (int i = 0; i < history.GetLength(0); i++)
+            {
+                int [,] buffer = new int[8,8];
+                for (int j = 0; j < 8; j++)
+                {
+                    for (int k = 0; k < 8; k++)
+                    {
+                        buffer[j, k] = history[i, j, k];
+                    }
+                }
+                DisplayBoard(buffer);
+            }
         }
     }
 }
