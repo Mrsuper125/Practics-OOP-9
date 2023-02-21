@@ -40,7 +40,7 @@ namespace Проект_5_модуля
             return (blackI > 1 && blackJ < 6 && whiteI == blackI - 1 && whiteJ - 1 == blackJ);
         }
 
-        public static int[,,] fillHistory(int[,,] historyParam)
+        public static int[,,] fillHistory(int[,,] historyParam, int[,] board)
         {
             int[,,] resultHistory = new int[historyParam.GetLength(0) + 1, 8, 8];
             if (history.GetLength(0) > 0)
@@ -56,13 +56,23 @@ namespace Проект_5_модуля
                     }
                 }
             }
+            else
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    for (int k = 0; k < 8; k++)
+                    {
+                        resultHistory[0, j, k] = board[j, k];
+                    }
+                }
+            }
 
             return resultHistory;
         }
 
         public static void Take(int[,,] historyParam, int[,] board, int blackI, int blackJ, int count)
         {
-            int[,,] localHistory = fillHistory(historyParam);
+            int[,,] localHistory = fillHistory(historyParam, board);
             
             if (White(blackI - 1, blackJ -1, board) && UpperLeft(blackI, blackJ, blackI - 1, blackJ - 1))
             {
