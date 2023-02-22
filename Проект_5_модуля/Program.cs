@@ -22,7 +22,7 @@ namespace Проект_5_модуля
         
         public static bool LowerLeft(int blackI, int blackJ, int whiteI, int whiteJ)
         {
-            return (blackI < 6 && blackJ > 1 && whiteI - 1 == blackI && whiteJ == blackJ);
+            return (blackI < 6 && blackJ > 1 && whiteI - 1 == blackI && whiteJ == blackJ - 1);
         }
         
         public static bool LowerRight(int blackI, int blackJ, int whiteI, int whiteJ)
@@ -43,7 +43,7 @@ namespace Проект_5_модуля
         public static int[,,] fillHistory(int[,,] historyParam, int[,] board)
         {
             int[,,] resultHistory = new int[historyParam.GetLength(0) + 1, 8, 8];
-            if (history.GetLength(0) > 0)
+            if (historyParam.GetLength(0) > 0)
             {
                 for (int i = 0; i < historyParam.GetLength(0); i++)
                 {
@@ -51,8 +51,15 @@ namespace Проект_5_модуля
                     {
                         for (int k = 0; k < 8; k++)
                         {
-                            resultHistory[i, j, k] = history[i, j, k];
+                            resultHistory[i, j, k] = historyParam[i, j, k];
                         }
+                    }
+                }
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        resultHistory[resultHistory.GetLength(0) - 1, i, j] = board[i, j];
                     }
                 }
             }
@@ -70,17 +77,6 @@ namespace Проект_5_модуля
             return resultHistory;
         }
 
-        public static void AddToLocalHistory(ref int[,,] localHistory, int[,] board)
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    localHistory[localHistory.GetLength(0) - 1, i, j] = board[i, j];
-                }
-            }
-        }
-        
         public static void Take(int[,,] historyParam, int[,] board, int blackI, int blackJ, int count)
         {
             int[,,] localHistory = fillHistory(historyParam, board);
@@ -93,8 +89,6 @@ namespace Проект_5_модуля
                 boardCopy[blackI - 1, blackJ - 1] = 0;
                 boardCopy[blackI - 2, blackJ - 2] = -1;
 
-                AddToLocalHistory(ref localHistory, boardCopy);
-                
                 Take(localHistory, boardCopy, blackI - 2, blackJ - 2, count + 1);
             }
             if (White(blackI+1, blackJ +1, board) && LowerRight(blackI, blackJ, blackI+1, blackJ+1))
@@ -105,8 +99,6 @@ namespace Проект_5_модуля
                 boardCopy[blackI + 1, blackJ + 1] = 0;
                 boardCopy[blackI + 2, blackJ + 2] = -1;
 
-                AddToLocalHistory(ref localHistory, boardCopy);
-                
                 Take(localHistory, boardCopy, blackI + 2, blackJ + 2, count + 1);
             }
             if (White(blackI+1, blackJ -1, board) && LowerLeft(blackI, blackJ, blackI+1, blackJ-1))
@@ -117,8 +109,6 @@ namespace Проект_5_модуля
                 boardCopy[blackI + 1, blackJ - 1] = 0;
                 boardCopy[blackI + 2, blackJ - 2] = -1;
 
-                AddToLocalHistory(ref localHistory, boardCopy);
-                
                 Take(localHistory, boardCopy, blackI + 2, blackJ - 2, count + 1);
             }
             if (White(blackI-1, blackJ +1, board) && UpperRight(blackI, blackJ, blackI-1, blackJ+1))
@@ -128,15 +118,13 @@ namespace Проект_5_модуля
                 boardCopy[blackI, blackJ] = 0;
                 boardCopy[blackI - 1, blackJ + 1] = 0;
                 boardCopy[blackI - 2, blackJ + 2] = -1;
-
-                AddToLocalHistory(ref localHistory, boardCopy);
                 
                 Take(localHistory, boardCopy, blackI - 2, blackJ + 2, count + 1);
             }
             if (count > max)
             {
                 max = count;
-                history = historyParam;
+                history = localHistory;
             }
         }
         
@@ -185,8 +173,8 @@ namespace Проект_5_модуля
             board[3, 5] = 1;
             board[5, 3] = 1;
             board[3, 3] = 1;
-            board[1, 1] = 1;
-            board[7, 1] = 1;
+            board[1, 3] = 1;
+            board[1, 5] = 1;
             DisplayBoard(board);
             
             Take(new int[0,8,8], board, 4, 4, 0);
