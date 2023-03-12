@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Management.Instrumentation;
 using System.Text.RegularExpressions;
 
@@ -24,7 +25,8 @@ namespace Фоновая_4._3
     {
         _9_1 = 1,
         _9_2,
-        _9_3
+        _9_3,
+        _9_4
     }
 
     public struct Lesson
@@ -40,6 +42,8 @@ namespace Фоновая_4._3
     
     internal class Program
     {
+        private static int[] classrooms;
+        
         public static Lesson[,] schedule;
 
         public static Lesson FindLessonByGroupAndNumber(Groups group, int number)
@@ -163,6 +167,53 @@ namespace Фоновая_4._3
             }
             return res;
         }
+
+        public static bool FillHoles(Groups group)
+        {
+            for(int i = 0; i < schedule.GetLength(0); i++)
+            {
+                if (!schedule[i, (int)group - 1].initialized)
+                {
+                    List<int> freeCabinets = classrooms.ToList();
+                    for (int j = 0; j < schedule.GetLength(1); j++)
+                    {
+                        if (freeCabinets.Contains(schedule[i, j].Classroom))
+                        {
+                            freeCabinets.Remove(schedule[i, j].Classroom);
+                        }
+                    }
+
+                    if (freeCabinets.Count > 0) Console.WriteLine($"Потенциальный кабинет на {i + 1} урок - {freeCabinets[0]}");
+                    else
+                    {
+                        Console.WriteLine($"Не удалось найти свободный кабинет на {i+1} урок");
+                        return false;
+                    }
+
+                    List<Teachers> freeTeachers = new List<Teachers>();
+                    for (int j = 0; j < (int)Teachers.Терёхина_АО; j++)
+                    {
+                        freeTeachers.Add((Teachers)(j+1));
+                    }
+                    for (int j = 0; j < schedule.GetLength(1); j++)
+                    {
+                        if (freeTeachers.Contains(schedule[i, j].Teacher))
+                        {
+                            freeTeachers.Remove(schedule[i, j].Teacher);
+                        }
+                    }
+                    
+                    if (freeTeachers.Count > 0) Console.WriteLine($"Потенциальный учитель на {i + 1} урок - {freeTeachers[0]}");
+                    else
+                    {
+                        Console.WriteLine($"Не удалось найти свободного учителя на {i} урок");
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
         
         public static void Main(string[] args)
         {
@@ -176,6 +227,7 @@ namespace Фоновая_4._3
              * В четвёртой строке записывается номер предмета, соответствующий его номеру в перечислении.
              * В пятой строке записывается номер урока в расписании.
              */
+            classrooms = new int[] { 313, 209, 104 };
             
             StreamReader scheduleText = new StreamReader("Schedule.txt");
             int groupsCount = Convert.ToInt32(scheduleText.ReadLine());
@@ -206,8 +258,9 @@ namespace Фоновая_4._3
             }
             
             PrintSchedule(schedule);
-            CheckTeachers();
-            CheckClassrooms();
+            // CheckTeachers();
+            // CheckClassrooms();
+            FillHoles(Groups._9_1);
         }
     }
 }
