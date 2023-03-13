@@ -110,14 +110,14 @@ namespace Фоновая_4._3
                 busyTeachersList = new List<Teachers>();
                 for (int j = 0; j < schedule.GetLength(1); j++)
                 {
-                    if (busyTeachersList.Contains(schedule[i, j].Teacher))
-                    {
-                        busyTeachersList.Add(schedule[i, j].Teacher);
-                    }
-                    else
+                    if (busyTeachersList.Contains(schedule[i, j].Teacher) && schedule[i, j].initialized)
                     {
                         throw new InvalidDataException("Два урока в одно и то же время у одного учителя");
                         return false;
+                    }
+                    else
+                    {
+                        busyTeachersList.Add(schedule[i, j].Teacher);
                     }
                 }
             }
@@ -133,14 +133,14 @@ namespace Фоновая_4._3
                 occupiedClassroomsList = new List<int>();
                 for (int j = 0; j < schedule.GetLength(1); j++)
                 {
-                    if (occupiedClassroomsList.Contains(schedule[i, j].Classroom))
-                    {
-                        occupiedClassroomsList.Add(schedule[i, j].Classroom);
-                    }
-                    else
+                    if (occupiedClassroomsList.Contains(schedule[i, j].Classroom) && schedule[i, j].initialized)
                     {
                         throw new InvalidDataException("Два урока в одно и то же время в одном классе");
                         return false;
+                    }
+                    else
+                    {
+                        occupiedClassroomsList.Add(schedule[i, j].Classroom);
                     }
                 }
             }
@@ -258,8 +258,8 @@ namespace Фоновая_4._3
             }
             
             PrintSchedule(schedule);
-            // CheckTeachers();
-            // CheckClassrooms();
+            CheckTeachers();
+            CheckClassrooms();
             FillHoles(Groups._9_1);
         }
     }
