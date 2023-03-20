@@ -65,10 +65,15 @@ namespace Point3D
         public static void Main(string[] args)
         {
             Point3D Bob = new Point3D(0, 0, 0);
-            Console.WriteLine("Это Боб. Сейчас вам будет предложено ввести его координаты. Зачем - спросите Боба.");
-            for (int i = 0; i < 3; i++)
+            Console.WriteLine("Это Боб.");
+            Console.WriteLine("Хотите ввести ему координаты сами или сделам дефолтного боба? \"Да\" = ввести, что-то другое - дефолтного");
+            string ans = Console.ReadLine();
+            if(ans == "Да")
             {
-                Bob.Move();
+                for (int i = 0; i < 3; i++)
+                {
+                    Bob.Move();
+                }
             }
             Bob.PrintCoordinates();
             Console.WriteLine("Радиус-вектор Боба - " + Bob.Radius());
