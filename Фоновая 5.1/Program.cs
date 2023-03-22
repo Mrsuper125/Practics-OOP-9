@@ -57,7 +57,8 @@ namespace Фоновая_5._1
 
         public Ellipse()
         {
-            
+            semiMajorAxis = 5;
+            semiMinorAxis = 2;
         }
 
         public Ellipse(int semiMajorAxisParam, int semiMinorAxisParam)
@@ -67,9 +68,37 @@ namespace Фоновая_5._1
             focalLength = Math.Sqrt(Math.Pow(semiMajorAxis, 2) - Math.Pow(semiMinorAxis, 2));
         }
 
-        public double Eccentricity()
+        private double Eccentricity()
         {
             return focalLength / semiMajorAxis;
+        }
+
+        public double Radius()
+        {
+            Console.Write("Введите угол между большой полуосью и радиусом");
+            int angle = Convert.ToInt32(Console.ReadLine());
+            return semiMinorAxis / (Math.Sqrt(1 - Math.Pow(Math.E, 2) * Math.Pow(Math.Cos(angle), 2)));
+        }
+
+        public double FocalParameter()
+        {
+            return Math.Pow(semiMinorAxis, 2) / semiMajorAxis;
+        }
+
+        public double Area()
+        {
+            return Math.PI * semiMajorAxis * semiMinorAxis;
+        }
+
+        public double Length()
+        {
+            double sum = semiMajorAxis + semiMinorAxis;
+            double diff = semiMajorAxis - semiMinorAxis;
+
+            return Math.PI * sum *
+                   (1 + 3 * Math.Pow(diff / sum, 2) / 
+                       (10 + Math.Sqrt(4 - 3 * Math.Pow(diff / sum, 2))));
+            //Вторая формула Рамануджана
         }
     }
     
