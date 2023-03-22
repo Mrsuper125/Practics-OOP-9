@@ -6,28 +6,46 @@ namespace Фоновая_5._1
     class Paralelipiped
     {
         private int width;
-        private int heigth;
+        private int height;
         private int length;
+        private int x;
+        private int y;
 
         public Paralelipiped()
         {
+            width = 6;
+            height = 5;
+            length = 7;
         }
 
-        public Paralelipiped(int widthParam, int heigthParam, int lengthParam)
+        public Paralelipiped(int width, int height, int length, int x, int y)
         {
-            width = widthParam;
-            heigth = heigthParam;
-            length = lengthParam;
+            this.width = width;
+            this.height = height;
+            this.length = length;
+            this.x = x;
+            this.y = y;
+        }
+
+        public string Dimensions()
+        {
+            return $"Длина - {length}, ширина - {width}, высота - {height}";
         }
 
         public int Area()
         {
-            return 2 * width * heigth + 2 * heigth * length + 2 * length * width;
+            return 2 * width * height + 2 * height * length + 2 * length * width;
         }
 
         public int Volume()
         {
-            return width * heigth * length;
+            return width * height * length;
+        }
+
+        public void Move(int x, int y)
+        {
+            this.x += x;
+            this.y += y;
         }
     }
 

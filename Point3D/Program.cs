@@ -58,6 +58,11 @@ namespace Point3D
         {
             return Math.Sqrt(x*x + y*y + z*z);  
         }
+        
+        public static Point3D operator +(Point3D a, Point3D b)
+        {
+            return new Point3D(a.x + b.x, a.y + b.y, a.z + b.z);
+        }
     }
     
     internal class Program
@@ -77,6 +82,13 @@ namespace Point3D
             }
             Bob.PrintCoordinates();
             Console.WriteLine("Радиус-вектор Боба - " + Bob.Radius());
+            Point3D Bill = new Point3D(3, 2, 1);
+            Console.WriteLine("А это Билл.");
+            Bill.PrintCoordinates();
+            Console.WriteLine("Го сложим Билла с Бобом? Хз зачем но попробуем");
+            Point3D Bib = Bob + Bill;
+            Console.WriteLine("Получился Биб");
+            Bib.PrintCoordinates();
         }
     }
 }
