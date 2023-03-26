@@ -21,6 +21,76 @@ namespace Point3D
             z = zParam;
         }
 
+        public Point3D(decimal coordinates)
+        {
+            x = Convert.ToInt32(coordinates);
+            decimal tail = coordinates % 1;
+            while (tail % 1 != 0)
+            {
+                tail *= 10;
+            }
+
+            y = (int)tail;
+        }
+
+        public int X
+        {
+            get
+            {
+                return x;
+            }
+            set
+            {
+                if (x + value > 0) x = value;
+                else throw new ArgumentException("x must be positive");
+            }
+        }
+
+        public int Y
+        {
+            get
+            {
+                return y;
+            }
+            set
+            {
+                if (x + value > 0)
+                {
+                    if (x + value <= 100) x = value;
+                    else x = 100;
+                }
+                else throw new ArgumentException("x must be positive");
+            }
+        }
+
+        public int Z
+        {
+            get
+            {
+                return z;
+            }
+            set
+            {
+                if (value <= x+y)
+                {
+                    z = value;  
+                }
+                else
+                {
+                    Console.WriteLine("z must not be greater then x+y");
+                }
+            }
+            
+        }
+
+        public bool IsInField
+        {
+            get
+            {
+                return x <= 10 && y >= 2 && y <= x;
+            }
+        }
+
         public void Move()
         {
             Console.Write("Введите  ось координат, по которой сдвинуть точку: ");
@@ -48,20 +118,40 @@ namespace Point3D
                     break;
             }
         }
-
-        public void PrintCoordinates()
-        {
-            Console.WriteLine($"Координаты точки: x - {x}; y - {y}; z- {z}");
-        }
-
-        public double Radius()
-        {
-            return Math.Sqrt(x*x + y*y + z*z);  
-        }
         
+        public string Coordinates
+        {
+            get
+            {
+                return $"Координаты точки: x - {x}; y - {y}; z- {z}";
+            }
+        }
+
+        public double Radius
+        {
+            get
+            {
+                return Math.Sqrt(x * x + y * y + z * z);
+            }
+        }
+
         public static Point3D operator +(Point3D a, Point3D b)
         {
-            return new Point3D(a.x + b.x, a.y + b.y, a.z + b.z);
+            return new Point3D(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
+        }
+
+        public void AddInt(int term)
+        {
+            X += term;
+            Y += term;
+            Z += term;
+        }
+
+        public void Add(Point3D term)
+        {
+            X += term.X;
+            Y += term.Y;
+            Z += term.Z;
         }
     }
     
@@ -80,15 +170,29 @@ namespace Point3D
                     Bob.Move();
                 }
             }
-            Bob.PrintCoordinates();
-            Console.WriteLine("Радиус-вектор Боба - " + Bob.Radius());
+            Console.WriteLine(Bob.Coordinates);
+            Console.WriteLine("Радиус-вектор Боба - " + Bob.Radius);
             Point3D Bill = new Point3D(3, 2, 1);
             Console.WriteLine("А это Билл.");
-            Bill.PrintCoordinates();
+            Console.WriteLine(Bill.Coordinates);
             Console.WriteLine("Го сложим Билла с Бобом? Хз зачем но попробуем");
             Point3D Bib = Bob + Bill;
             Console.WriteLine("Получился Биб");
-            Bib.PrintCoordinates();
+            Console.WriteLine(Bib.Coordinates);
+            
+            Console.WriteLine("Вот есть у нас область в пространстве. Что за область - спросите Анну Олеговну. Проверим, попадает ли Биб туда. Зачем - спросите Анну Олеговну.");
+            Console.WriteLine(Bib.IsInField);
+            Console.WriteLine("Давайте сдвинем Биба на 1 по всем осям");
+            Bib.AddInt(1);
+            Console.WriteLine(Bib.Coordinates);
+            
+            Console.WriteLine("Создадим Джона. Введите его x и y координаты через запятую без пробелов");
+            Point3D John = new Point3D(Convert.ToDecimal(Console.ReadLine()));
+            
+            Console.WriteLine("Прибавим Джона к Бибу");
+            Bib.Add(John);
+            Console.WriteLine(Bib.Coordinates);
+            //P.S. Работу свойств X, Y, Z я уже демонстрирую в других методах/свойствах
         }
     }
 }
