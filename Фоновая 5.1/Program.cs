@@ -55,6 +55,43 @@ namespace Фоновая_5._1
         private int semiMinorAxis;
         private double focalLength;
 
+        public int SemiMajorAxis
+        {
+            get { return semiMajorAxis; }
+            set
+            {
+                if (value > 0)
+                {
+                    semiMajorAxis = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Semi-major axis can't be equal to zero or be negative");
+                }
+            }
+        }
+
+        public int SemiMinorAxis
+        {
+            get { return semiMinorAxis; }
+            set
+            {
+                if (value > 0)
+                {
+                    semiMinorAxis = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Semi-minor axis can't be equal to zero or be negative");
+                }
+            }
+        }
+
+        public bool Circle
+        {
+            get { return this.Eccentricity == 0; }
+        }
+
         public Ellipse()
         {
             semiMajorAxis = 5;
@@ -68,44 +105,50 @@ namespace Фоновая_5._1
             focalLength = Math.Sqrt(Math.Pow(semiMajorAxis, 2) - Math.Pow(semiMinorAxis, 2));
         }
 
-        private double Eccentricity()
+        private double Eccentricity
         {
-            return focalLength / semiMajorAxis;
+            get { return focalLength / semiMajorAxis; }
         }
 
-        public double Radius()
+        public double Radius
         {
-            Console.Write("Введите угол между большой полуосью и радиусом");
-            int angle = Convert.ToInt32(Console.ReadLine());
-            return semiMinorAxis / (Math.Sqrt(1 - Math.Pow(Math.E, 2) * Math.Pow(Math.Cos(angle), 2)));
+            get
+            {
+                Console.Write("Введите угол между большой полуосью и радиусом");
+                int angle = Convert.ToInt32(Console.ReadLine());
+                return semiMinorAxis / (Math.Sqrt(1 - Math.Pow(Math.E, 2) * Math.Pow(Math.Cos(angle), 2)));
+            }
         }
 
-        public double FocalParameter()
+        public double FocalParameter
         {
-            return Math.Pow(semiMinorAxis, 2) / semiMajorAxis;
+            get { return Math.Pow(semiMinorAxis, 2) / semiMajorAxis; }
         }
 
-        public double Area()
+        public double Area
         {
-            return Math.PI * semiMajorAxis * semiMinorAxis;
+            get { return Math.PI * semiMajorAxis * semiMinorAxis; }
         }
 
-        public double Length()
+        public double Length
         {
-            double sum = semiMajorAxis + semiMinorAxis;
-            double diff = semiMajorAxis - semiMinorAxis;
+            get
+            {
+                double sum = semiMajorAxis + semiMinorAxis;
+                double diff = semiMajorAxis - semiMinorAxis;
 
-            return Math.PI * sum *
-                   (1 + 3 * Math.Pow(diff / sum, 2) / 
-                       (10 + Math.Sqrt(4 - 3 * Math.Pow(diff / sum, 2))));
-            //Вторая формула Рамануджана
+                return Math.PI * sum *
+                       (1 + 3 * Math.Pow(diff / sum, 2) /
+                           (10 + Math.Sqrt(4 - 3 * Math.Pow(diff / sum, 2))));
+                //Вторая формула Рамануджана}
+            }
         }
-    }
-    
-    internal class Program
-    {
-        public static void Main(string[] args)
+
+        internal class Program
         {
+            public static void Main(string[] args)
+            {
+            }
         }
     }
 }
