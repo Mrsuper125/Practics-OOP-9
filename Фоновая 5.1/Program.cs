@@ -105,19 +105,24 @@ namespace Фоновая_5._1
             focalLength = Math.Sqrt(Math.Pow(semiMajorAxis, 2) - Math.Pow(semiMinorAxis, 2));
         }
 
-        private double Eccentricity
+        public double FocalLength
+        {
+            get
+            {
+                return focalLength;
+            }
+        }
+
+        public double Eccentricity
         {
             get { return focalLength / semiMajorAxis; }
         }
 
-        public double Radius
+        public double Radius()
         {
-            get
-            {
-                Console.Write("Введите угол между большой полуосью и радиусом");
-                int angle = Convert.ToInt32(Console.ReadLine());
-                return semiMinorAxis / (Math.Sqrt(1 - Math.Pow(Math.E, 2) * Math.Pow(Math.Cos(angle), 2)));
-            }
+            Console.Write("Введите угол между большой полуосью и радиусом: ");
+            int angle = Convert.ToInt32(Console.ReadLine());
+            return semiMinorAxis / (Math.Sqrt(1 - Math.Pow(Math.E, 2) * Math.Pow(Math.Cos(angle), 2)));
         }
 
         public double FocalParameter
@@ -144,22 +149,23 @@ namespace Фоновая_5._1
             }
         }
 
-        internal class Program
+        public string Description
         {
-            public static void Main(string[] args)
+            get
             {
-                Ellipse ellipse = new Ellipse(3, 2);
-                ellipse.SemiMinorAxis = 3;
-                ellipse.SemiMajorAxis = 4;
-                Console.WriteLine(ellipse.Length);
-                Console.WriteLine(ellipse.Area);
-                Console.WriteLine(ellipse.Circle);
-                Console.WriteLine(ellipse.Eccentricity);
-                Console.WriteLine(ellipse.focalLength);
-                Console.WriteLine(ellipse.Radius);
-                Console.WriteLine(ellipse.SemiMinorAxis);
-                Console.WriteLine(ellipse.SemiMajorAxis);
+                return $"Малая полуось - {semiMinorAxis}, большая полуось - {semiMajorAxis}, периметр - {Length} (значение приближённое), площадь - {Area}, кругом {(Circle ? "является" : "не является")}, эксцентриситет - {Eccentricity}, фокусное расстояние - {focalLength}, радиус - {Radius()}";
             }
+        }
+    }
+    
+    internal class Program
+    {
+        public static void Main(string[] args)
+        {
+            Ellipse ellipse = new Ellipse(3, 2);
+            ellipse.SemiMinorAxis = 3;
+            ellipse.SemiMajorAxis = 4;
+            Console.WriteLine(ellipse.Description);
         }
     }
 }

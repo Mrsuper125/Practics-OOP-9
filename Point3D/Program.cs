@@ -9,28 +9,54 @@ namespace Point3D
         private int y;
         private int z;
 
+        public static bool CheckValues(int x, int y, int z)
+        {
+            if (!(x % 5 == 0 || y % 5 == 0 || z % 5 == 0)) return false;
+            if (x < 0) return false;
+            if (y < 0 || y > 100) return false;
+            if (z > x + y) return false;
+            return true;
+        }
+        
         public Point3D()
         {
             
         }
 
-        public Point3D(int xParam, int yParam, int zParam)
+        public Point3D(int x, int y, int z)
         {
-            x = xParam;
-            y = yParam;
-            z = zParam;
+            if (Point3D.CheckValues(x, y, z))
+            {
+                this.x = x;
+                this.y = y;
+                this.z = z;
+            }
+            else
+            {
+                Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
+            }
         }
 
         public Point3D(decimal coordinates)
         {
-            x = Convert.ToInt32(coordinates);
+            int xUnchecked = Convert.ToInt32(coordinates);
             decimal tail = coordinates % 1;
             while (tail % 1 != 0)
             {
                 tail *= 10;
             }
 
-            y = (int)tail;
+            int yUnchecked = (int)tail;
+            if (Point3D.CheckValues(xUnchecked, yUnchecked, 0))
+            {
+                x = xUnchecked;
+                y = yUnchecked;
+                z = 0;
+            }
+            else
+            {
+                Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
+            }
         }
 
         public int X
@@ -41,8 +67,11 @@ namespace Point3D
             }
             set
             {
-                if (x + value > 0) x = value;
-                else throw new ArgumentException("x must be positive");
+                if (Point3D.CheckValues(value, y, z))
+                {
+                    x = value;
+                }
+                else Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
             }
         }
 
@@ -54,12 +83,12 @@ namespace Point3D
             }
             set
             {
-                if (x + value > 0)
+                if (Point3D.CheckValues(x, value, z))
                 {
                     if (x + value <= 100) x = value;
                     else x = 100;
                 }
-                else throw new ArgumentException("x must be positive");
+                else Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
             }
         }
 
@@ -71,13 +100,13 @@ namespace Point3D
             }
             set
             {
-                if (value <= x+y)
+                if (Point3D.CheckValues(x, y, value))
                 {
-                    z = value;  
+                    z = value;
                 }
                 else
                 {
-                    Console.WriteLine("z must not be greater then x+y");
+                    Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
                 }
             }
             
@@ -101,17 +130,38 @@ namespace Point3D
                 case "x":
                     Console.WriteLine("Введите расстояние, на которое сдвинуть точку: ");
                     distance = Convert.ToInt32(Console.ReadLine());
-                    x += distance;
+                    if (Point3D.CheckValues(x+distance, y, z))
+                    {
+                        x += distance;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
+                    }
                     break;
                 case "y":
                     Console.WriteLine("Введите расстояние, на которое сдвинуть точку: ");
                     distance = Convert.ToInt32(Console.ReadLine());
-                    y += distance;
+                    if (Point3D.CheckValues(x, y+distance, z))
+                    {
+                        y += distance;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
+                    }
                     break;
                 case "z":
                     Console.WriteLine("Введите расстояние, на которое сдвинуть точку: ");
                     distance = Convert.ToInt32(Console.ReadLine());
-                    z += distance;
+                    if (Point3D.CheckValues(x, y, z+distance))
+                    {
+                        z += distance;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
+                    }
                     break;
                 default:
                     Console.WriteLine("Такой оси не существует");
@@ -137,21 +187,43 @@ namespace Point3D
 
         public static Point3D operator +(Point3D a, Point3D b)
         {
-            return new Point3D(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
+            if (Point3D.CheckValues(a.X + b.X, a.Y + b.Y, a.Z + b.Z))
+            {
+                return new Point3D(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
+            }
+            else
+            {
+                Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
+                return new Point3D();
+            }
         }
 
         public void AddInt(int term)
         {
-            X += term;
-            Y += term;
-            Z += term;
+            if (Point3D.CheckValues(x + term, y + term, z+term))
+            {
+                x += term;
+                y += term;
+                z += term;
+            }
+            else 
+            {
+                Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
+            }
         }
 
         public void Add(Point3D term)
         {
-            X += term.X;
-            Y += term.Y;
-            Z += term.Z;
+            if (Point3D.CheckValues(x + term.X, y + term.Y, z+term.Z))
+            {
+                x += term.X;
+                y += term.Y;
+                z += term.Z;
+            }
+            else 
+            {
+                Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
+            }
         }
     }
     
