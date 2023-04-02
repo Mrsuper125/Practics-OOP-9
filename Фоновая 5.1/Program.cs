@@ -148,6 +148,17 @@ namespace Фоновая_5._1
         {
             public static void Main(string[] args)
             {
+                Ellipse ellipse = new Ellipse(3, 2);
+                ellipse.SemiMinorAxis = 3;
+                ellipse.SemiMajorAxis = 4;
+                Console.WriteLine(ellipse.Length);
+                Console.WriteLine(ellipse.Area);
+                Console.WriteLine(ellipse.Circle);
+                Console.WriteLine(ellipse.Eccentricity);
+                Console.WriteLine(ellipse.focalLength);
+                Console.WriteLine(ellipse.Radius);
+                Console.WriteLine(ellipse.SemiMinorAxis);
+                Console.WriteLine(ellipse.SemiMajorAxis);
             }
         }
     }
