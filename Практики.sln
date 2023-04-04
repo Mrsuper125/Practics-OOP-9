@@ -63,6 +63,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Point3D", "Point3D\Point3D.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Фоновая 5.1", "Фоновая 5.1\Фоновая 5.1.csproj", "{33EA3517-9B47-466A-966C-51B5F141E370}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Игры с картами", "Игры с картами\Игры с картами.csproj", "{DBEBB10E-37C5-49D9-B026-265AD9C8B969}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -189,6 +191,10 @@ Global
 		{33EA3517-9B47-466A-966C-51B5F141E370}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33EA3517-9B47-466A-966C-51B5F141E370}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33EA3517-9B47-466A-966C-51B5F141E370}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBEBB10E-37C5-49D9-B026-265AD9C8B969}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBEBB10E-37C5-49D9-B026-265AD9C8B969}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBEBB10E-37C5-49D9-B026-265AD9C8B969}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBEBB10E-37C5-49D9-B026-265AD9C8B969}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
