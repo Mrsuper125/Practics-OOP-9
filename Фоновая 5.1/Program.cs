@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 
 namespace Фоновая_5._1
 {
@@ -55,6 +55,12 @@ namespace Фоновая_5._1
         private int semiMinorAxis;
         private double focalLength;
 
+
+        static bool NormalEllipse(int SemiMinorAxis, int SemiMajorAxis)
+        {
+            return SemiMinorAxis > 0 && SemiMajorAxis > 0;
+        }
+        
         public int SemiMajorAxis
         {
             get { return semiMajorAxis; }
@@ -100,9 +106,18 @@ namespace Фоновая_5._1
 
         public Ellipse(int semiMajorAxisParam, int semiMinorAxisParam)
         {
-            semiMajorAxis = semiMajorAxisParam;
-            semiMinorAxis = semiMinorAxisParam;
-            focalLength = Math.Sqrt(Math.Pow(semiMajorAxis, 2) - Math.Pow(semiMinorAxis, 2));
+            if (NormalEllipse(semiMinorAxis, SemiMajorAxis))
+            {
+                semiMajorAxis = semiMajorAxisParam;
+                semiMinorAxis = semiMinorAxisParam;
+                focalLength = Math.Sqrt(Math.Pow(semiMajorAxis, 2) - Math.Pow(semiMinorAxis, 2));
+            }
+            else
+            {
+                semiMinorAxis = 1;
+                semiMajorAxis = 1;
+                focalLength = 0.0;
+            }
         }
 
         public double FocalLength
@@ -122,7 +137,15 @@ namespace Фоновая_5._1
         {
             Console.Write("Введите угол между большой полуосью и радиусом: ");
             int angle = Convert.ToInt32(Console.ReadLine());
-            return semiMinorAxis / (Math.Sqrt(1 - Math.Pow(Math.E, 2) * Math.Pow(Math.Cos(angle), 2)));
+            if (angle > 0 && angle < 180)
+            {
+                return semiMinorAxis / (Math.Sqrt(1 - Math.Pow(Math.E, 2) * Math.Pow(Math.Cos(angle), 2)));
+            }
+            else
+            {
+                Console.WriteLine("Дурак! Угол должен быть от 1 до 179 градусов включительно! Ну играй теперь с 90 градусами!");
+                return semiMinorAxis / (Math.Sqrt(1 - Math.Pow(Math.E, 2) * Math.Pow(Math.Cos(90), 2)));
+            }
         }
 
         public double FocalParameter
@@ -162,10 +185,22 @@ namespace Фоновая_5._1
     {
         public static void Main(string[] args)
         {
-            Ellipse ellipse = new Ellipse(3, 2);
-            ellipse.SemiMinorAxis = 3;
-            ellipse.SemiMajorAxis = 4;
-            Console.WriteLine(ellipse.Description);
+            Console.Write("Если вы хотите ввести размеры эллипса - введите \"да\", иначе введите что-то другое: ");
+            if (Console.ReadLine() == "да")
+            {
+                Console.Write("Введите большую полуось: ");
+                int semiMajorAxis = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Введите малую полуось: ");
+                int semiMinorAxis = Convert.ToInt32(Console.ReadLine());
+                Ellipse ellipse = new Ellipse(semiMajorAxis, semiMinorAxis);
+                Console.WriteLine(ellipse.Description);
+            }
+            else
+            {
+                Console.WriteLine("Сработал конструктор по умолчанию.");
+                Ellipse ellipse = new Ellipse();
+                Console.WriteLine(ellipse.Description);
+            }
         }
     }
 }

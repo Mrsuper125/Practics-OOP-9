@@ -18,12 +18,39 @@ namespace Point3D
             return true;
         }
         
+        public static Point3D CreatePoint(int x, int y, int z)
+        {
+            if (CheckValues(x, y, z))
+            {
+                return new Point3D(x, y, z);
+            }
+            else
+            {
+                Console.WriteLine("Дурак. Надоел уже.");
+                return new Point3D();
+            }
+        }
+        
+        public static Point3D CreatePoint(decimal coordinates)
+        {
+            Point3D point = new Point3D(coordinates);
+            if (Point3D.CheckValues(point.X, point.Y, point.Z))
+            {
+                return point;
+            }
+            else
+            {
+                Console.WriteLine("Дурак. Надоел уже.");
+                return new Point3D();
+            }
+        }
+        
         public Point3D()
         {
             
         }
 
-        public Point3D(int x, int y, int z)
+        private Point3D(int x, int y, int z)
         {
             if (Point3D.CheckValues(x, y, z))
             {
@@ -34,10 +61,13 @@ namespace Point3D
             else
             {
                 Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
+                this.x = 0;
+                this.y = 0;
+                this.z = 0;
             }
         }
 
-        public Point3D(decimal coordinates)
+        private Point3D(decimal coordinates)
         {
             int xUnchecked = Convert.ToInt32(coordinates);
             decimal tail = coordinates % 1;
@@ -56,6 +86,9 @@ namespace Point3D
             else
             {
                 Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
+                x = 0;
+                y = 0;
+                z = 0;
             }
         }
 
@@ -231,7 +264,7 @@ namespace Point3D
     {
         public static void Main(string[] args)
         {
-            Point3D Bob = new Point3D(0, 0, 0);
+            Point3D Bob = new Point3D();
             Console.WriteLine("Это Боб.");
             Console.WriteLine("Хотите ввести ему координаты сами или сделам дефолтного боба? \"Да\" = ввести, что-то другое - дефолтного");
             string ans = Console.ReadLine();
@@ -244,7 +277,7 @@ namespace Point3D
             }
             Console.WriteLine(Bob.Coordinates);
             Console.WriteLine("Радиус-вектор Боба - " + Bob.Radius);
-            Point3D Bill = new Point3D(3, 2, 1);
+            Point3D Bill = Point3D.CreatePoint(3, 2, 1);
             Console.WriteLine("А это Билл.");
             Console.WriteLine(Bill.Coordinates);
             Console.WriteLine("Го сложим Билла с Бобом? Хз зачем но попробуем");
@@ -259,7 +292,7 @@ namespace Point3D
             Console.WriteLine(Bib.Coordinates);
             
             Console.WriteLine("Создадим Джона. Введите его x и y координаты через запятую без пробелов");
-            Point3D John = new Point3D(Convert.ToDecimal(Console.ReadLine()));
+            Point3D John = Point3D.CreatePoint(Convert.ToDecimal(Console.ReadLine()));
             
             Console.WriteLine("Прибавим Джона к Бибу");
             Bib.Add(John);
