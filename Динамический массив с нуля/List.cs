@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Игры_с_картами
+namespace Динамический_массив_с_нуля
 {
     class List
     {
@@ -202,7 +202,7 @@ namespace Игры_с_картами
         }
     }
 
-    class ListItem
+    public class ListItem
     {
         public ListItem next;
         public int value;
@@ -211,26 +211,6 @@ namespace Игры_с_картами
         {
             this.value = value;
             this.next = next;
-        }
-    }
-    
-    internal class Program
-    {
-        public static void Main(string[] args)
-        {
-            List list = new List(3);
-            for (int i = 0; i < list.Length; i++)
-            {
-                Console.WriteLine(list[i]);
-            }
-            Console.WriteLine(list.Length);
-            list[1] = 1;
-            list[2] = 2;
-            list.Pop(2);
-            for (int i = 0; i < list.Length; i++)
-            {
-                Console.WriteLine(list[i]);
-            }
         }
     }
 }
