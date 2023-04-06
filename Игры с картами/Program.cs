@@ -10,27 +10,21 @@ namespace Игры_с_картами
         {
             head = null;
         }
-        
 
-        public void Append(ListItem item)
+        public void Append(int value)
         {
-            int length = Length();
-            if (length == 0)
+            if (head == null)
             {
-                head = item;
+                head = new ListItem(value, null);
             }
             else
             {
                 ListItem current = head;
-                while (length != 0)
+                while (current.next != null)
                 {
-                    
-                    Console.WriteLine(current.value);
                     current = current.next;
-                    length--;
                 }
-
-                current.next = item;
+                current.next = new ListItem(value, null);
             }
         }
         
@@ -38,41 +32,114 @@ namespace Игры_с_картами
         {
             for (int i = 0; i < length; i++)
             {
-                Append(new ListItem(i, null));
+                Append(i);
             }
         }
 
-        public int Length()
+        public int Length
         {
-            if (head == null)
+            get
             {
-                return 0;
-            }
-            else
-            {
-                int res = 0;
-                ListItem link = head;
-                while (link.next != null)
+                if (head == null)
                 {
-                    link = link.next;
-                    res++;
+                    return 0;
                 }
+                else
+                {
+                    int res = 1;
+                    ListItem link = head;
+                    while (link.next != null)
+                    {
 
-                return res;
+                        link = link.next;
+                        res++;
+                    }
+
+                    return res;
+                }
             }
         }
         
-        public ListItem Get(int index)
+        public ListItem this[int index]
         {
-            Console.WriteLine(head.next);
-            ListItem current = head;
-            while (index > 0)
+            get
             {
-                current = current.next;
-                index--;
-            }
+                if(index >= 0 && index < Length)
+                {
+                    ListItem current = head;
+                    while (index > 0)
+                    {
+                        current = current.next;
+                        index--;
+                    }
 
-            return current;
+                    return current;
+                }
+                else
+                {
+                    throw new ArgumentException("List index out of range");
+                }
+            }
+            set
+            {
+                if(index >= 0 && index < Length)
+                {
+                    ListItem current = head;
+                    while (index > 0)
+                    {
+                        current = current.next;
+                        index--;
+                    }
+
+                    if (value  == null)
+                    {
+                        current = null;
+                    }
+                    else
+                    {
+                        current = new ListItem(value.value, current.next);
+                        
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("List index out of range");
+                }
+            }
+        }
+
+        public void Pop(int index)
+        {
+            if (Length == 0)
+            {
+                throw new ArgumentException("Can't pop items from an empty List");
+            }
+            else
+            {
+                if (index >= Length || index < 0)
+                {
+                    throw new ArgumentException("List index out of range");
+                }
+                else
+                {
+                    if (Length  == index + 1)
+                    {
+                        if (index == 0)
+                        {
+                            this.head = null;
+                        }
+                        else
+                        {
+                            this[index - 1].next = null;
+                        }
+                    }
+                    else
+                    {
+                        this[index].value = this[index + 1].value;
+                        this[index].next = this[index + 1].next;
+                    }
+                }
+            }
         }
     }
 
@@ -93,7 +160,15 @@ namespace Игры_с_картами
         public static void Main(string[] args)
         {
             List list = new List(5);
-            Console.WriteLine(list.Length());
+            for (int i = 0; i < list.Length; i++)
+            {
+                Console.WriteLine(list[i].value);
+            }
+            Console.WriteLine(list.Length);
+            for (int i = 0; i < list.Length; i++)
+            {
+                Console.WriteLine(list[i].value);
+            }
         }
     }
 }
