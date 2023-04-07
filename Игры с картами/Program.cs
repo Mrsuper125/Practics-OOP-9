@@ -79,7 +79,7 @@ namespace Игры_с_картами
             }
         }
         
-        private void SetItem(int index, int? value)
+        private void SetItem(int index, int value)
         {
             int i = index;
             if(index > 0 && index < Length)
@@ -91,27 +91,12 @@ namespace Игры_с_картами
                     i--;
                 }
 
-                if (value == null)
-                {
-                    GetItem(index).next = null;
-                }
-                else
-                {
-                    current.value = (int)value;
-                        
-                }
+                
+                current.value = value;
             }
             else if (index == 0)
             {
-                if (value == null)
-                {
-                    head = null;
-                }
-                else
-                {
-                    head.value = (int)value;
-                        
-                }
+                head.value = value;
             }
             else
             {
@@ -189,7 +174,7 @@ namespace Игры_с_картами
                         }
                         else
                         {
-                            SetItem(index-1, null);
+                            GetItem(index-1).next = null;
                         }
                     }
                     else
@@ -226,7 +211,7 @@ namespace Игры_с_картами
             Console.WriteLine(list.Length);
             list[1] = 1;
             list[2] = 2;
-            list.Pop(2);
+            list.Pop(1);
             for (int i = 0; i < list.Length; i++)
             {
                 Console.WriteLine(list[i]);

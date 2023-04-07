@@ -79,7 +79,7 @@ namespace Динамический_массив_с_нуля
             }
         }
         
-        private void SetItem(int index, int? value)
+        private void SetItem(int index, int value)
         {
             int i = index;
             if(index > 0 && index < Length)
@@ -91,27 +91,12 @@ namespace Динамический_массив_с_нуля
                     i--;
                 }
 
-                if (value == null)
-                {
-                    GetItem(index).next = null;
-                }
-                else
-                {
-                    current.value = (int)value;
-                        
-                }
+                
+                current.value = value;
             }
             else if (index == 0)
             {
-                if (value == null)
-                {
-                    head = null;
-                }
-                else
-                {
-                    head.value = (int)value;
-                        
-                }
+                head.value = value;
             }
             else
             {
@@ -189,7 +174,7 @@ namespace Динамический_массив_с_нуля
                         }
                         else
                         {
-                            SetItem(index-1, null);
+                            GetItem(index-1).next = null;
                         }
                     }
                     else
