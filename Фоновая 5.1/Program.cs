@@ -145,12 +145,12 @@ namespace Фоновая_5._1
         {
             if (angle > 0 && angle < 180)
             {
-                return semiMinorAxis / (Math.Sqrt(1 - Math.Pow(Math.E, 2) * Math.Pow(Math.Cos(angle), 2)));
+                return semiMinorAxis / (Math.Sqrt(1 - Math.Pow(Eccentricity, 2) * Math.Pow(Math.Cos(angle), 2)));
             }
             else
             {
                 Console.WriteLine("Дурак! Угол должен быть от 1 до 89 градусов включительно! Ну играй теперь с 45 градусами!");
-                return semiMinorAxis / (Math.Sqrt(1 - Math.Pow(Math.E, 2) * Math.Pow(Math.Cos(45), 2)));
+                return semiMinorAxis / (Math.Sqrt(1 - Math.Pow(Eccentricity, 2) * Math.Pow(Math.Cos(45), 2)));
             }
         }
 
@@ -198,8 +198,8 @@ namespace Фоновая_5._1
         {
             get
             {
-                Console.Write("Введите угол между радиусом и большой полуосью.");
-                return $"Малая полуось - {semiMinorAxis}, большая полуось - {semiMajorAxis}, периметр - {Length:f2} (значение приближённое), площадь - {Area:f2}, кругом {(Circle ? "является" : "не является")}, эксцентриситет - {Eccentricity:f2}, фокусное расстояние - {focalLength:f2}, радиус - {Radius(Convert.ToInt32(Console.ReadLine()))}, фокальный параметр - {FocalParameter:f2}, апофокусное расстояние - {ApofocalDistance:f2}, перифокусное расстояние - {PerifocalDistance:f2}";
+                Console.Write("Введите угол между радиусом и большой полуосью: ");
+                return $"Малая полуось - {semiMinorAxis}, большая полуось - {semiMajorAxis}, периметр - {Length:f2} (значение приближённое), площадь - {Area:f2}, кругом {(Circle ? "является" : "не является")}, эксцентриситет - {Eccentricity:f2}, фокусное расстояние - {focalLength:f2}, радиус - {Radius(Convert.ToInt32(Console.ReadLine())):f2}, фокальный параметр - {FocalParameter:f2}, апофокусное расстояние - {ApofocalDistance:f2}, перифокусное расстояние - {PerifocalDistance:f2}";
             }
         }
     }
