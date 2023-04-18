@@ -11,38 +11,40 @@ namespace Point3D
 
         public static bool CheckValues(int x, int y, int z)
         {
-            if (!(x % 5 == 0 || y % 5 == 0 || z % 5 == 0)) return false;
-            if (x < 0) return false;
-            if (y < 0 || y > 100) return false;
-            if (z > x + y) return false;
+            if (!(x % 5 == 0 || y % 5 == 0 || z % 5 == 0)) throw new ArgumentException("at least one coordinate should be dividable by 5");
+            if (x < 0) throw new ArgumentException("x must be non-negative");
+            if (y < 0 || y > 100) throw new ArgumentException("y must be between 0 and 100 (both included)");
+            if (z > x + y) throw new ArgumentException("z must be not greater than x + y");
             return true;
         }
         
         public static Point3D CreatePoint(int x, int y, int z)
         {
-            if (CheckValues(x, y, z))
+            try
             {
-                return new Point3D(x, y, z);
+                CheckValues(x, y, z);
             }
-            else
+            catch (Exception e)
             {
-                Console.WriteLine("Дурак. Надоел уже.");
+                Console.WriteLine("0,0,0 point was created instead of desired because "+e.Message);
                 return new Point3D();
             }
+            return new Point3D(x, y, z);
         }
         
         public static Point3D CreatePoint(decimal coordinates)
         {
             Point3D point = new Point3D(coordinates);
-            if (Point3D.CheckValues(point.X, point.Y, point.Z))
+            try
             {
-                return point;
+                CheckValues(point.X, point.Y, point.Z);
             }
-            else
+            catch (Exception e)
             {
-                Console.WriteLine("Дурак. Надоел уже.");
+                Console.WriteLine("0,0,0 point was created instead of desired because "+e.Message);
                 return new Point3D();
             }
+            return point;
         }
         
         public Point3D()
@@ -52,44 +54,22 @@ namespace Point3D
 
         private Point3D(int x, int y, int z)
         {
-            if (Point3D.CheckValues(x, y, z))
-            {
-                this.x = x;
-                this.y = y;
-                this.z = z;
+            this.x = x;
+            this.y = y;
+            this.z = z;
             }
-            else
-            {
-                Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
-                this.x = 0;
-                this.y = 0;
-                this.z = 0;
-            }
-        }
 
         private Point3D(decimal coordinates)
         {
-            int xUnchecked = Convert.ToInt32(coordinates);
+            x = Convert.ToInt32(coordinates);
             decimal tail = coordinates % 1;
             while (tail % 1 != 0)
             {
                 tail *= 10;
             }
 
-            int yUnchecked = (int)tail;
-            if (Point3D.CheckValues(xUnchecked, yUnchecked, 0))
-            {
-                x = xUnchecked;
-                y = yUnchecked;
-                z = 0;
-            }
-            else
-            {
-                Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
-                x = 0;
-                y = 0;
-                z = 0;
-            }
+            y = (int)tail;
+            z = 0;
         }
 
         public int X
@@ -100,11 +80,16 @@ namespace Point3D
             }
             set
             {
-                if (Point3D.CheckValues(value, y, z))
+                try
                 {
-                    x = value;
+                    CheckValues(value, y, z);
                 }
-                else Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
+                catch (Exception e)
+                {
+                    Console.WriteLine("x-coordinate was not changed because "+e.Message);
+                    return;
+                }
+                x = value;
             }
         }
 
@@ -116,12 +101,16 @@ namespace Point3D
             }
             set
             {
-                if (Point3D.CheckValues(x, value, z))
+                try
                 {
-                    if (x + value <= 100) x = value;
-                    else x = 100;
+                    CheckValues(x, value, z);
                 }
-                else Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
+                catch (Exception e)
+                {
+                    Console.WriteLine("y-coordinate was not changed because "+e.Message);
+                    return;
+                }
+                y = value;
             }
         }
 
@@ -133,14 +122,16 @@ namespace Point3D
             }
             set
             {
-                if (Point3D.CheckValues(x, y, value))
+                try
                 {
-                    z = value;
+                    CheckValues(x, y, value);
                 }
-                else
+                catch (Exception e)
                 {
-                    Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
+                    Console.WriteLine("z-coordinate was not changed because "+e.Message);
+                    return;
                 }
+                z = value;
             }
             
         }
@@ -163,37 +154,37 @@ namespace Point3D
                 case "x":
                     Console.WriteLine("Введите расстояние, на которое сдвинуть точку: ");
                     distance = Convert.ToInt32(Console.ReadLine());
-                    if (Point3D.CheckValues(x+distance, y, z))
+                    try
                     {
-                        x += distance;
+                        CheckValues(x + distance, y, z);
                     }
-                    else
+                    catch (Exception e)
                     {
-                        Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
+                        Console.WriteLine("x-coordinate was not changed because "+e.Message);
                     }
                     break;
                 case "y":
                     Console.WriteLine("Введите расстояние, на которое сдвинуть точку: ");
                     distance = Convert.ToInt32(Console.ReadLine());
-                    if (Point3D.CheckValues(x, y+distance, z))
+                    try
                     {
-                        y += distance;
+                        CheckValues(x, y + distance, z);
                     }
-                    else
+                    catch (Exception e)
                     {
-                        Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
+                        Console.WriteLine("y-coordinate was not changed because "+e.Message);
                     }
                     break;
                 case "z":
                     Console.WriteLine("Введите расстояние, на которое сдвинуть точку: ");
                     distance = Convert.ToInt32(Console.ReadLine());
-                    if (Point3D.CheckValues(x, y, z+distance))
+                    try
                     {
-                        z += distance;
+                        CheckValues(x, y, z+distance);
                     }
-                    else
+                    catch (Exception e)
                     {
-                        Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
+                        Console.WriteLine("z-coordinate was not changed because "+e.Message);
                     }
                     break;
                 default:
