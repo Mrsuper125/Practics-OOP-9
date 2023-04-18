@@ -211,43 +211,49 @@ namespace Point3D
 
         public static Point3D operator +(Point3D a, Point3D b)
         {
-            if (Point3D.CheckValues(a.X + b.X, a.Y + b.Y, a.Z + b.Z))
+            try
             {
-                return new Point3D(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
+                Point3D.CheckValues(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
             }
-            else
+            catch (Exception e)
             {
-                Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
+                Console.WriteLine("Points can't be added because " +e.Message);
                 return new Point3D();
             }
+            return new Point3D(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
+            
         }
 
         public void AddInt(int term)
         {
-            if (Point3D.CheckValues(x + term, y + term, z+term))
+            try
             {
-                x += term;
-                y += term;
-                z += term;
+                Point3D.CheckValues(x + term, y + term, z + term);
             }
-            else 
+            catch (Exception e)
             {
-                Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
+                Console.WriteLine($"Number {term} can't be added to the point because " +e.Message);
+                return;
             }
+            x += term;
+            y += term;
+            z += term;
         }
 
         public void Add(Point3D term)
         {
-            if (Point3D.CheckValues(x + term.X, y + term.Y, z+term.Z))
+            try
             {
-                x += term.X;
-                y += term.Y;
-                z += term.Z;
+                Point3D.CheckValues(x + term.X, y + term.Y, z + term.Z);
             }
-            else 
+            catch (Exception e)
             {
-                Console.WriteLine("Ну ты и дурак! Правильную точку делай!");
+                Console.WriteLine($"Number {term} can't be added to the point because " +e.Message);
+                return;
             }
+            x += term.X;
+            y += term.Y;
+            z += term.Z;
         }
     }
     
