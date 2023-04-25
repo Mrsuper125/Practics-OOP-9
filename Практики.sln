@@ -67,6 +67,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Игры с картами"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Динамический массив с нуля", "Динамический массив с нуля\Динамический массив с нуля.csproj", "{3F957B61-2CEC-456A-B1CC-8C48B9F369ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Фоновая 5.2", "Фоновая 5.2\Фоновая 5.2.csproj", "{7F41B9E6-92DD-4807-9833-A7A7F570FB83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -201,6 +203,10 @@ Global
 		{3F957B61-2CEC-456A-B1CC-8C48B9F369ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F957B61-2CEC-456A-B1CC-8C48B9F369ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F957B61-2CEC-456A-B1CC-8C48B9F369ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F41B9E6-92DD-4807-9833-A7A7F570FB83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F41B9E6-92DD-4807-9833-A7A7F570FB83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F41B9E6-92DD-4807-9833-A7A7F570FB83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F41B9E6-92DD-4807-9833-A7A7F570FB83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
