@@ -37,17 +37,19 @@ namespace Игры_с_картами
         {
             get
             {
+                if (position >= deck.Count || position < 0) throw new ArgumentException("Card index must be non-negative and not exceed the index of the last card");
                 return deck[position-1];
             }
         }
 
-        public void Pop(int position)
-        {
-            deck.RemoveAt(position-1);
-        }
+        // public void Pop(int position)
+        // {
+        //     deck.RemoveAt(position-1);
+        // }
 
         public void Shuffle()
         {
+            if (deck.Count == 0) throw new Exception("Can't shuffle an empty deck");
             List<Cards> auxillary = new List<Cards>();
             foreach (Cards item in deck)
             {
@@ -67,6 +69,7 @@ namespace Игры_с_картами
 
         public void Give(Player player, int amount)
         {
+            if (amount > deck.Count || amount < 1) throw new ArgumentException("Cards count mustn't exceed deck size or be less than 1");
             List<Cards> toGive;
             toGive = deck.GetRange(0, amount);
             player.Get(toGive);
@@ -96,6 +99,7 @@ namespace Игры_с_картами
 
         public void Open(int amount)
         {
+            if (amount < 0) throw new ArgumentException("Can't open less than 1 cards");
             if (deck.Count < amount)
             {
                 Console.WriteLine($"У игрока {number} недостаточно карт. Игра окончена. Победил игрок {3 - number}.");
@@ -110,6 +114,7 @@ namespace Игры_с_картами
 
         public static List<Cards> Compose(List<Cards> list1, List<Cards> list2)
         {
+            if (list1.Count < 1 || list2.Count < 1) throw new ArgumentException("Can't compose empty decks");
             List<Cards> list1Copy = new List<Cards>(list1);
             List<Cards> list2Copy = new List<Cards>(list2);
             int minLength = Math.Min(list1Copy.Count, list2Copy.Count);
@@ -188,8 +193,8 @@ namespace Игры_с_картами
                     player1.openedDeck = new List<Cards>();
                 }
             }
-            Console.WriteLine(player1.deck.Count + player2.deck.Count);
-            Console.WriteLine(player1.openedDeck.Count + player2.openedDeck.Count);
+            //Console.WriteLine(player1.deck.Count + player2.deck.Count);
+            //Console.WriteLine(player1.openedDeck.Count + player2.openedDeck.Count);
         }
     }
     
