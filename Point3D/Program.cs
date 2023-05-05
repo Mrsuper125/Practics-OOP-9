@@ -218,29 +218,148 @@ namespace Point3D
             catch (Exception e)
             {
                 Console.WriteLine("Points can't be added because " +e.Message);
-                return new Point3D();
+                return a;
             }
             return new Point3D(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
             
         }
 
-        public void AddInt(int term)
+        public static Point3D operator +(Point3D a,  int term)
         {
             try
             {
-                Point3D.CheckValues(x + term, y + term, z + term);
+                Point3D.CheckValues(a.x + term, a.y + term, a.z + term);
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Number {term} can't be added to the point because " +e.Message);
-                return;
+                return a;
             }
-            x += term;
-            y += term;
-            z += term;
+            return new Point3D(a.x + term, a.y + term, a.z + term);
+        }
+        
+        public static Point3D operator -(Point3D a, Point3D b)
+        {
+            try
+            {
+                Point3D.CheckValues(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Points can't be subtracted because " +e.Message);
+                return a;
+            }
+            return new Point3D(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
+            
         }
 
-        public void Add(Point3D term)
+        public static Point3D operator -(Point3D a,  int term)
+        {
+            try
+            {
+                Point3D.CheckValues(a.x - term, a.y - term, a.z - term);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Number {term} can't be subtracted from the point because " +e.Message);
+                return a;
+            }
+            return new Point3D(a.x - term, a.y - term, a.z - term);
+        }
+
+        public static Point3D operator --(Point3D a)
+        {
+            try
+            {
+                Point3D.CheckValues(a.x - 1, a.y - 1, a.z - 1);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"1 can't be subtracted from the point because " +e.Message);
+                return a;
+            }
+            return new Point3D(a.x - 1, a.y - 1, a.z - 1);
+        }
+        
+        public static Point3D operator ++(Point3D a)
+        {
+            try
+            {
+                Point3D.CheckValues(a.x + 1, a.y + 1, a.z + 1);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"1 can't be added to the point because " +e.Message);
+                return a;
+            }
+            return new Point3D(a.x + 1, a.y + 1, a.z + 1);
+        }
+
+        public static bool operator <=(Point3D a, Point3D b)
+        {
+            return a.Radius <= b.Radius;
+        }
+        
+        public static bool operator >=(Point3D a, Point3D b)
+        {
+            return a.Radius >= b.Radius;
+        }
+
+        public static bool operator true(Point3D a)
+        {
+            return a.x >= 0 && a.y <= 0 && a.z > 0;
+        }
+        
+        public static bool operator false(Point3D a)
+        {
+            return a.x < 0 || a.y > 0 || a.z <= 0;
+        }
+
+        public static bool operator &(Point3D a, Point3D b)
+        {
+            if (a)
+            {
+                if (b)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            return false;
+        }
+        
+        public static bool operator |(Point3D a, Point3D b)
+        {
+            if (a)
+            {
+                return true;
+            }
+
+            if (b)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static Point3D operator >> (Point3D a, int num)
+        {
+            try
+            {
+                Point3D.CheckValues(a.x + num, a.y + num, a.z + num);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Number {num} can't be added to the point because " +e.Message);
+                return a;
+            }
+            return new Point3D(a.x + num, a.y + num, a.z + num);
+        }
+
+        /*public void Add(Point3D term)
         {
             try
             {
@@ -254,7 +373,7 @@ namespace Point3D
             x += term.X;
             y += term.Y;
             z += term.Z;
-        }
+        }*/
     }
     
     internal class Program
@@ -285,15 +404,32 @@ namespace Point3D
             Console.WriteLine("Вот есть у нас область в пространстве. Что за область - спросите Анну Олеговну. Проверим, попадает ли Биб туда. Зачем - спросите Анну Олеговну.");
             Console.WriteLine(Bib.IsInField);
             Console.WriteLine("Давайте сдвинем Биба на 1 по всем осям");
-            Bib.AddInt(1);
+            Bib = Bib + 1;
             Console.WriteLine(Bib.Coordinates);
             
             Console.WriteLine("Создадим Джона. Введите его x и y координаты через запятую без пробелов");
             Point3D John = Point3D.CreatePoint(Convert.ToDecimal(Console.ReadLine()));
-            
+
+
             Console.WriteLine("Прибавим Джона к Бибу");
-            Bib.Add(John);
+            Bib += John;
             Console.WriteLine(Bib.Coordinates);
+            
+            Console.WriteLine("Анна Олеговна хочет мейн - мейн она получит. Создадим Саню, Ваню, и Аню.");
+            Point3D Sanya = Point3D.CreatePoint(5, 3, 3);
+            Point3D Vanya = Point3D.CreatePoint(4, 5, 4);            
+            Point3D Anya = Point3D.CreatePoint(5, 5, 5);
+            Console.WriteLine("Их координаты: " + Sanya.Coordinates +", " + Vanya.Coordinates + ", " + Anya.Coordinates);
+            
+            Console.WriteLine("Саня - Ваня: " + (Sanya-Vanya).Coordinates);
+            Console.WriteLine("Саня - 5: " + (Sanya-5).Coordinates);
+            Console.WriteLine("Ваня++: " + Vanya++.Coordinates);
+            Console.WriteLine("Ваня--: " + Vanya--.Coordinates);
+            Console.WriteLine("Саня >= Ваня: " + (Sanya >= Vanya));
+            Console.WriteLine("Саня <= Ваня: " + (Sanya <= Vanya));
+            Console.WriteLine("Саня & Ваня: " + (Sanya&Vanya));
+            Console.WriteLine("Саня | Аня: " + (Sanya|Vanya));
+            Console.WriteLine("Саня >> 5: " + (Sanya >> 5).Coordinates);
             //P.S. Работу свойств X, Y, Z я уже демонстрирую в других методах/свойствах
         }
     }
