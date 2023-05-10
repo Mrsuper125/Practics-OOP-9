@@ -58,7 +58,9 @@ namespace Фоновая_5._1
 
         static bool NormalEllipse(int SemiMinorAxis, int SemiMajorAxis)
         {
-            return SemiMinorAxis > 0 && SemiMajorAxis > 0;
+            if (SemiMinorAxis <= 0) throw new ArgumentException("semi-minor axis must be positive.");
+            if (SemiMajorAxis <= 0) throw new ArgumentException("semi-major axis must be positive.");
+            return true;
         }
         
         public int SemiMajorAxis
@@ -66,14 +68,17 @@ namespace Фоновая_5._1
             get { return semiMajorAxis; }
             set
             {
-                if (value > 0)
+                try
                 {
-                    semiMajorAxis = value;
+                    NormalEllipse(semiMinorAxis, value);
                 }
-                else
+                catch (Exception e)
                 {
-                    throw new ArgumentException("Semi-major axis can't be equal to zero or be negative");
+                    Console.WriteLine("Semi-major axis was not changed because "+e.Message);
+                    return;
                 }
+
+                semiMajorAxis = value;
             }
         }
 
@@ -82,14 +87,17 @@ namespace Фоновая_5._1
             get { return semiMinorAxis; }
             set
             {
-                if (value > 0)
+                try
                 {
-                    semiMinorAxis = value;
+                    NormalEllipse(value, semiMajorAxis);
                 }
-                else
+                catch (Exception e)
                 {
-                    throw new ArgumentException("Semi-minor axis can't be equal to zero or be negative");
+                    Console.WriteLine("Semi-minor axis was not changed because "+e.Message);
+                    return;
                 }
+
+                semiMinorAxis = value;
             }
         }
 
@@ -106,18 +114,21 @@ namespace Фоновая_5._1
 
         public Ellipse(int semiMajorAxis, int semiMinorAxis)
         {
-            if (NormalEllipse(semiMinorAxis, semiMajorAxis))
+            try
             {
-                this.semiMajorAxis = semiMajorAxis;
-                this.semiMinorAxis = semiMinorAxis;
-                focalLength = Math.Sqrt(Math.Pow(semiMajorAxis, 2) - Math.Pow(semiMinorAxis, 2));
+                NormalEllipse(semiMinorAxis, semiMajorAxis);
             }
-            else
+            catch (Exception e)
             {
-                this.semiMinorAxis = 1;
-                this.semiMajorAxis = 1;
-                focalLength = 0.0;
+                Console.WriteLine("Default ellipse was created instead of desired because "+e.Message);
+                this.semiMinorAxis = 2;
+                this.semiMajorAxis = 5;
+                focalLength = Math.Sqrt(21);
+                return;
             }
+            this.semiMajorAxis = semiMajorAxis;
+            this.semiMinorAxis = semiMinorAxis;
+            focalLength = Math.Sqrt(Math.Pow(semiMajorAxis, 2) - Math.Pow(semiMinorAxis, 2));
         }
 
         public double FocalLength
