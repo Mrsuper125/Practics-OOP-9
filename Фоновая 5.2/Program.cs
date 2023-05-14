@@ -150,18 +150,8 @@ namespace Фоновая_5._2
                 }
 
                 day = value;
-                
-                List<int> auxillary = new List<int>();
-                foreach (int[] row in temperature)
-                {
-                    foreach (int temp in row)
-                    {
-                        if (temp != NoData)
-                        {
-                            auxillary.Add(temp);
-                        }
-                    }
-                }
+
+                List<int> auxillary = this.AllDays;
 
                 WeatherMatrix newMatrix = new WeatherMatrix(month, value);
 
@@ -202,6 +192,26 @@ namespace Фоновая_5._2
                         if (temp == 0)
                         {
                             res++;
+                        }
+                    }
+                }
+
+                return res;
+            }
+        }
+
+        public List<int> AllDays
+        {
+            get
+            {
+                List<int> res = new List<int>();
+                foreach (int[] row in temperature)
+                {
+                    foreach (int temp in row)
+                    {
+                        if (temp != NoData)
+                        {
+                            res.Add(temp);
                         }
                     }
                 }
@@ -300,6 +310,92 @@ namespace Фоновая_5._2
 
             return maxDiff;
         }
+
+        public static bool operator >(WeatherMatrix a, WeatherMatrix b)
+        {
+            return (int)a.month > (int)b.month;
+        }
+        
+        public static bool operator <(WeatherMatrix a, WeatherMatrix b)
+        {
+            return (int)a.month < (int)b.month;
+        }
+
+        public static WeatherMatrix operator ++(WeatherMatrix a)
+        {
+            if (a.Day < 7)
+            {
+                a.Day++;
+            }
+            else
+            {
+                a.Day = 1;
+            }
+
+            return a;
+        }
+        
+        public static WeatherMatrix operator --(WeatherMatrix a)
+        {
+            if (a.Day > 1)
+            {
+                a.Day--;
+            }
+            else
+            {
+                a.Day = 7;
+            }
+
+            return a;
+        }
+
+        public static bool operator true(WeatherMatrix a)
+        {
+            foreach (int[] row in a.temperature)
+            {
+                foreach (int item in row)
+                {
+                    if (item < 0 && item != NoData)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+        
+        public static bool operator false(WeatherMatrix a)
+        {
+            foreach (int[] row in a.temperature)
+            {
+                foreach (int item in row)
+                {
+                    if (item < 0 && item != NoData)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        public static bool operator &(WeatherMatrix a, WeatherMatrix b)
+        {
+            List<int> aRow = a.AllDays;
+            List<int> bRow = b.AllDays;
+            int count = Math.Min(aRow.Count, bRow.Count);
+            for (int i = 0; i < count; i++)
+            {
+                if (Math.Abs(aRow[i] - bRow[i]) > 10)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
         
         private static string Spaces(int length)
         {
@@ -388,6 +484,8 @@ namespace Фоновая_5._2
             // matrix.Day = 5;
             // matrix.Print();
             // Console.WriteLine(matrix.Count + " " + matrix.ZeroDegreesDays);
+
+            Random rn = new Random();
             
             Console.WriteLine("Добро пожаловать в дневник погоды. Введите номер месяца: ");
             int intMonth;
@@ -423,8 +521,13 @@ namespace Фоновая_5._2
                               "6) Вывести на экран количество дней в месяце с температурой в 0 градусов\n" +
                               "7) Вывести на экран максимальный скачок температуры за месяц\n" +
                               "8) Вывести на экран максимальный скачок температуры за месяц с номером дня и температурой до скачка\n" +
-                              "9) Изменить температуру в некоторый день\n"+
-                              "10) Закрыть программу");
+                              "9) Изменить температуру в некоторый день\n" +
+                              "10) Создать новый рандомный дневник и сравнить номер его месяца с имеющимся\n" +
+                              "11) Сдвинуть дневник на один день вправо\n" +
+                              "12) Сдвинуть дневник на один день влево\n" +
+                              "13) Проверить, не было ли отрицательных температур в месяце\n" +
+                              "14) Создать рандомный дневник погоды на тот же месяц и проверить, нет ли в каком-то его дне разницы больше чем на 10 градусов с таким же днём текущего\n" +
+                              "15) Закрыть программу");
 
             bool running = true;
             while (running)
@@ -528,6 +631,53 @@ namespace Фоновая_5._2
                         Console.WriteLine("Температура изменена успешно");
                         break;
                     case 10:
+                        WeatherMatrix b = new WeatherMatrix((Month)rn.Next(1, 13), 1);
+                        if (matrix > b)
+                        {
+                            Console.WriteLine("Наш дневник погоды написан по более позднему месяцу");
+                        }
+                        else if(matrix < b)
+                        {
+                            Console.WriteLine("Наш дневник погоды написан по более раннему месяцу");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Дневники погоды написаны по одному и тому же месяцу");
+                        }
+
+                        break;
+                    case 11:
+                        matrix++;
+                        Console.WriteLine("Сделано");
+                        break;
+                    case 12:
+                        matrix--;
+                        Console.WriteLine("Сделано");
+                        break;
+                    case 13:
+                        if (matrix)
+                        {
+                            Console.WriteLine("Тёпленький выдался месяц, без отрицательных температур");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Отрицательные температуры были");
+                        }
+                        break;
+                    case 14:
+                        WeatherMatrix second = new WeatherMatrix(matrix.Month, matrix.Day);
+                        Console.WriteLine("Вот второй дневник:");
+                        second.Print();
+                        if (matrix & second)
+                        {
+                            Console.WriteLine("Аномальных разниц температур не было");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Были достаточно больше разницы теммператур");
+                        }
+                        break;
+                    case 15:
                         Console.WriteLine("Выполнение программы остановлено");
                         running = false;
                         break;
