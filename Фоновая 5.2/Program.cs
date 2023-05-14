@@ -81,6 +81,53 @@ namespace Фоновая_5._2
             }
         }
 
+        public int this[int row, int column]
+        {
+            get
+            {
+                if (row < 1 || row > temperature.Count)
+                {
+                    throw new ArgumentException("Номер недели должен быть не меньше 1 и не больше количества недель в месяце (количества строк в таблице)");
+                }
+                if (column > 7 || column < 1)
+                {
+                    throw new ArgumentException("День недели должен быть выражен числом от 1 до 7 включительно");
+                }
+
+                return temperature[row - 1][column - 1];
+            }
+            set
+            {
+                if (row < 1 || row > temperature.Count)
+                {
+                    throw new ArgumentException("Номер недели должен быть не меньше 1 и не больше количества недель в месяце (количества строк в таблице)");
+                }
+                if (column > 7 || column < 1)
+                {
+                    throw new ArgumentException("День недели должен быть выражен числом от 1 до 7 включительно");
+                }
+                int max = 30;
+                int min = 0;
+                if ((int)this.month < 6)
+                {
+                    min -=(6-((int)this.month))*5;
+                    max -=(6-((int)this.month))*3;
+                }
+                else
+                {
+                    min -=(((int)this.month)-6)*5;
+                    max -=(((int)this.month)-6)*3;
+                }
+
+                if (value < min || value > max)
+                {
+                    throw new ArgumentException($"Извини, но число {value} в качестве температуры данного месяца выглядит странно");
+                }
+
+                temperature[row - 1][column - 1] = value;
+            }
+        }
+
         public List<int[]> Temperature
         {
             get
@@ -376,7 +423,8 @@ namespace Фоновая_5._2
                               "6) Вывести на экран количество дней в месяце с температурой в 0 градусов\n" +
                               "7) Вывести на экран максимальный скачок температуры за месяц\n" +
                               "8) Вывести на экран максимальный скачок температуры за месяц с номером дня и температурой до скачка\n" +
-                              "9) Закрыть программу");
+                              "9) Изменить температуру в некоторый день\n"+
+                              "10) Закрыть программу");
 
             bool running = true;
             while (running)
@@ -440,6 +488,46 @@ namespace Фоновая_5._2
                         Console.WriteLine($"{matrix.Difference(out day, out temp)}, номер дня до скачка - {day}, температура до скачка - {temp}");
                         break;
                     case 9:
+                        Console.WriteLine("Введите номер недели, номер дня недели и новую температуру в виде чисел на 3 разных строках:");
+                        int week;
+                        int dayNumber;
+                        int newTemperature;
+                        success = int.TryParse(Console.ReadLine(), out week);
+
+                        if (!success)
+                        {
+                            Console.WriteLine("Введено не число");
+                            continue;
+                        }
+                        
+                        success = int.TryParse(Console.ReadLine(), out dayNumber);
+
+                        if (!success)
+                        {
+                            Console.WriteLine("Введено не число");
+                            continue;
+                        }
+                        
+                        success = int.TryParse(Console.ReadLine(), out newTemperature);
+
+                        if (!success)
+                        {
+                            Console.WriteLine("Введено не число");
+                            continue;
+                        }
+
+                        try
+                        {
+                            matrix[week, dayNumber] = newTemperature;
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Действие не было выполнено потому что: "+e.Message);
+                            continue;
+                        }
+                        Console.WriteLine("Температура изменена успешно");
+                        break;
+                    case 10:
                         Console.WriteLine("Выполнение программы остановлено");
                         running = false;
                         break;

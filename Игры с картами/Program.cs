@@ -82,12 +82,14 @@ namespace Игры_с_картами
         private List<Cards> deck;
         public List<Cards> openedDeck;
         public int number;
+        private int moves;
 
         public Player(int number)
         {
             deck = new List<Cards>();
             openedDeck = new List<Cards>();
             this.number = number;
+            moves = 1;
         }
 
         public void Get(List<Cards> cards)
@@ -103,6 +105,7 @@ namespace Игры_с_картами
             if (deck.Count < amount)
             {
                 Console.WriteLine($"У игрока {number} недостаточно карт. Игра окончена. Победил игрок {3 - number}.");
+                Console.WriteLine("Игра закончилась за "+moves+" ходов");
                 Environment.Exit(0);
             }
             else
@@ -193,6 +196,9 @@ namespace Игры_с_картами
                     player1.openedDeck = new List<Cards>();
                 }
             }
+
+            player1.moves++;
+            player2.moves++;
             //Console.WriteLine(player1.deck.Count + player2.deck.Count);
             //Console.WriteLine(player1.openedDeck.Count + player2.openedDeck.Count);
         }
